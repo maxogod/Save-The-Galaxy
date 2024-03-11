@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://b4yin1rgl4dcc"]
+
+[ext_resource type="Script" path="res://scripts/volume_slider.gd" id="1_6jkiu"]
+
+[node name="VolumeSlider" type="HSlider"]
+offset_left = 91.0
+offset_top = 707.0
+offset_right = 451.0
+offset_bottom = 727.0
+min_value = -20.0
+max_value = 10.0
+script = ExtResource("1_6jkiu")
+bus_name = "Master"
+
+[connection signal="drag_ended" from="." to="." method="_on_drag_ended"]

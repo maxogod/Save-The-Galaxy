@@ -1,0 +1,113 @@
+[gd_scene load_steps=16 format=3 uid="uid://cnqjoy4og6t2m"]
+
+[ext_resource type="Script" path="res://scripts/game.gd" id="1_c8tug"]
+[ext_resource type="AudioStream" uid="uid://hbql5gp5owh7" path="res://assets/audio/laser_sound.wav" id="5_l74ch"]
+[ext_resource type="PackedScene" uid="uid://orowf3dgmkvo" path="res://scenes/hud.tscn" id="5_vxxjy"]
+[ext_resource type="AudioStream" uid="uid://wwlwtdj30ney" path="res://assets/audio/explosion.wav" id="6_lofc0"]
+[ext_resource type="AudioStream" uid="uid://db83egf7tmi1g" path="res://assets/audio/player_death.wav" id="6_lyk1y"]
+[ext_resource type="PackedScene" uid="uid://cwy1ux26gtt1f" path="res://scenes/game_over_screen.tscn" id="6_ohlro"]
+[ext_resource type="AudioStream" uid="uid://dyhhr5risjsd5" path="res://assets/audio/hitmarker.wav" id="6_rx4y0"]
+[ext_resource type="PackedScene" uid="uid://dcva24n81lnur" path="res://scenes/universe.tscn" id="7_kdm3m"]
+[ext_resource type="AudioStream" uid="uid://dlt5v4ynunsrm" path="res://assets/audio/bomb.wav" id="9_b4cgn"]
+[ext_resource type="AudioStream" uid="uid://bani8qsducpxh" path="res://assets/audio/game_over.wav" id="9_k70dn"]
+[ext_resource type="AudioStream" uid="uid://dud3h08hewhay" path="res://assets/audio/button.wav" id="9_kwe1e"]
+[ext_resource type="AudioStream" uid="uid://b5n2l70a744ib" path="res://assets/audio/bomb_shot.wav" id="10_2rmlh"]
+[ext_resource type="AudioStream" uid="uid://cwvv2kactssv8" path="res://assets/audio/music.wav" id="11_a1dl5"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hh0jc"]
+bg_color = Color(0.160784, 0.160784, 0.160784, 0.458824)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oc4u0"]
+bg_color = Color(0.352941, 0, 0, 0.560784)
+border_blend = true
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_c8tug")
+
+[node name="Sounds" type="Node" parent="."]
+
+[node name="LaserSound" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("5_l74ch")
+volume_db = -15.0
+pitch_scale = 0.89
+
+[node name="HitSound" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("6_rx4y0")
+volume_db = -10.0
+
+[node name="ExplodeSound" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("6_lofc0")
+volume_db = -5.0
+
+[node name="PlayerDeathSound" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("6_lyk1y")
+volume_db = -10.0
+pitch_scale = 0.68
+
+[node name="GameOverSound" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("9_k70dn")
+volume_db = -10.0
+
+[node name="AmbientMusic" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("11_a1dl5")
+volume_db = -20.0
+
+[node name="ButtonSound" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("9_kwe1e")
+volume_db = -10.0
+
+[node name="BombSound" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("9_b4cgn")
+volume_db = -8.0
+pitch_scale = 0.84
+
+[node name="BombShot" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("10_2rmlh")
+volume_db = -7.0
+
+[node name="UILayer" type="CanvasLayer" parent="."]
+
+[node name="HUD" parent="UILayer" instance=ExtResource("5_vxxjy")]
+
+[node name="GameOverScreen" parent="UILayer" instance=ExtResource("6_ohlro")]
+visible = false
+
+[node name="InvasionProgress" type="ProgressBar" parent="UILayer"]
+anchors_preset = -1
+anchor_left = 0.0703704
+anchor_top = -0.0197917
+anchor_right = 0.933333
+anchor_bottom = -0.0197917
+offset_top = 98.0
+offset_bottom = 108.0
+grow_horizontal = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_hh0jc")
+theme_override_styles/fill = SubResource("StyleBoxFlat_oc4u0")
+value = 50.0
+show_percentage = false
+metadata/_edit_use_anchors_ = true
+
+[node name="Universe" parent="." instance=ExtResource("7_kdm3m")]
+
+[node name="EnemySpawnTimer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[node name="PlayerSpawnPos" type="Marker2D" parent="."]
+position = Vector2(270, 870)
+
+[node name="LaserContainer" type="Node2D" parent="."]
+
+[node name="EnemyContainer" type="Node2D" parent="."]
+
+[node name="ExplosionsContainer" type="Node2D" parent="."]
+
+[connection signal="timeout" from="EnemySpawnTimer" to="." method="_on_enemy_spawn_timer_timeout"]

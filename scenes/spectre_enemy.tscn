@@ -1,0 +1,62 @@
+[gd_scene load_steps=8 format=3 uid="uid://8jc61lm7xp7u"]
+
+[ext_resource type="Script" path="res://scripts/spectre_enemy.gd" id="1_qp5py"]
+[ext_resource type="Texture2D" uid="uid://cleic22id077f" path="res://assets/textures/enemy_spectre_1.png" id="1_yb46a"]
+[ext_resource type="Texture2D" uid="uid://dxnrt58xlajc3" path="res://assets/textures/enemy_spectre_2.png" id="2_lvucy"]
+[ext_resource type="Texture2D" uid="uid://dpqg88mcaa12d" path="res://assets/textures/enemy_spectre_3.png" id="3_ucf4h"]
+[ext_resource type="Texture2D" uid="uid://dhv5hvlv1c6y0" path="res://assets/textures/enemy_spectre_4.png" id="4_l68so"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_n4unl"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_yb46a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_lvucy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_ucf4h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_l68so")
+}],
+"loop": true,
+"name": &"flying",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w0jvo"]
+size = Vector2(70, 45)
+
+[node name="SpectreEnemy" type="Area2D"]
+script = ExtResource("1_qp5py")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+rotation = 3.14159
+scale = Vector2(0.7, 0.7)
+sprite_frames = SubResource("SpriteFrames_n4unl")
+animation = &"flying"
+autoplay = "flying"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1.5)
+shape = SubResource("RectangleShape2D_w0jvo")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(0, -62)
+
+[node name="WeaponLeft" type="Marker2D" parent="."]
+position = Vector2(-24, 46)
+
+[node name="WeaponRight" type="Marker2D" parent="."]
+position = Vector2(23, 46)
+
+[node name="LaserTimer" type="Timer" parent="."]
+wait_time = 0.9
+autostart = true
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
+[connection signal="timeout" from="LaserTimer" to="." method="_on_laser_timer_timeout"]

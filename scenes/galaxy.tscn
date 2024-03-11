@@ -1,0 +1,35 @@
+[gd_scene load_steps=7 format=3 uid="uid://d26yjvaq5k74o"]
+
+[ext_resource type="Texture2D" uid="uid://bskmcxnrwry10" path="res://assets/textures/galaxy_1.png" id="1_lojps"]
+[ext_resource type="Texture2D" uid="uid://ct6rudyct8ht" path="res://assets/textures/galaxy_2.png" id="2_lb4ds"]
+[ext_resource type="Texture2D" uid="uid://d0w26uiyxt05g" path="res://assets/textures/galaxy_3.png" id="3_uyqdw"]
+[ext_resource type="Texture2D" uid="uid://ct6qeptdkgdkd" path="res://assets/textures/galaxy_4.png" id="4_r3i6f"]
+[ext_resource type="Script" path="res://scripts/galaxy.gd" id="5_t5gjh"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_m7vqe"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_lojps")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_lb4ds")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_uyqdw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_r3i6f")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Galaxy" type="AnimatedSprite2D"]
+position = Vector2(42, 872)
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_m7vqe")
+autoplay = "default"
+frame_progress = 0.614847
+script = ExtResource("5_t5gjh")

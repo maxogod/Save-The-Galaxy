@@ -1,0 +1,60 @@
+[gd_scene load_steps=8 format=3 uid="uid://b4ffo0sgh8san"]
+
+[ext_resource type="Script" path="res://scripts/tank_enemy.gd" id="1_qsvfy"]
+[ext_resource type="Texture2D" uid="uid://cnawoucdjn2uy" path="res://assets/textures/enemy_tank_1.png" id="2_5w4xe"]
+[ext_resource type="Texture2D" uid="uid://cv51jetrlb30g" path="res://assets/textures/enemy_tank_2.png" id="3_2ddnd"]
+[ext_resource type="Texture2D" uid="uid://bqmeggfsvjxki" path="res://assets/textures/enemy_tank_3.png" id="4_civjs"]
+[ext_resource type="Texture2D" uid="uid://b2u3dphcnqeyk" path="res://assets/textures/enemy_tank_4.png" id="5_ikyyu"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_iiy53"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_5w4xe")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_2ddnd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_civjs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_ikyyu")
+}],
+"loop": true,
+"name": &"flying",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_aehej"]
+size = Vector2(116, 70)
+
+[node name="TankEnemy" type="Area2D"]
+script = ExtResource("1_qsvfy")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+rotation = 3.14159
+scale = Vector2(1.4, 1.4)
+sprite_frames = SubResource("SpriteFrames_iiy53")
+animation = &"flying"
+autoplay = "flying"
+frame_progress = 0.866369
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 8)
+shape = SubResource("RectangleShape2D_aehej")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(0, -106)
+
+[node name="Weapon" type="Marker2D" parent="."]
+position = Vector2(0, 71)
+
+[node name="LaserTimer" type="Timer" parent="."]
+wait_time = 1.5
+autostart = true
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
+[connection signal="timeout" from="LaserTimer" to="." method="_on_laser_timer_timeout"]

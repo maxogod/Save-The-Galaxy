@@ -1,0 +1,84 @@
+[gd_scene load_steps=12 format=3 uid="uid://mxu05c0s7r07"]
+
+[ext_resource type="Script" path="res://scripts/common_enemy.gd" id="1_a3jan"]
+[ext_resource type="Texture2D" uid="uid://bxv80x52k831h" path="res://assets/textures/enemy_common_1.png" id="2_0fk2n"]
+[ext_resource type="Texture2D" uid="uid://cvfsbq67veo15" path="res://assets/textures/explosion_1.png" id="2_dpbq8"]
+[ext_resource type="Texture2D" uid="uid://55nky2frf5df" path="res://assets/textures/explosion_2.png" id="3_1l1on"]
+[ext_resource type="Texture2D" uid="uid://b5auqchhq6gr0" path="res://assets/textures/enemy_common_2.png" id="3_x5tt6"]
+[ext_resource type="Texture2D" uid="uid://dq7ulsnooosgl" path="res://assets/textures/enemy_common_3.png" id="4_djdn0"]
+[ext_resource type="Texture2D" uid="uid://btufcaasvxrlw" path="res://assets/textures/explosion_3.png" id="4_hdosi"]
+[ext_resource type="Texture2D" uid="uid://dmyrqg7u0m3b7" path="res://assets/textures/explosion_4.png" id="5_a8fok"]
+[ext_resource type="Texture2D" uid="uid://dpdjemdy1htb3" path="res://assets/textures/enemy_common_4.png" id="5_ljrxl"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_iv05s"]
+animations = [{
+"frames": [{
+"duration": 0.8,
+"texture": ExtResource("2_dpbq8")
+}, {
+"duration": 0.8,
+"texture": ExtResource("3_1l1on")
+}, {
+"duration": 0.8,
+"texture": ExtResource("4_hdosi")
+}, {
+"duration": 0.8,
+"texture": ExtResource("5_a8fok")
+}, {
+"duration": 0.8,
+"texture": ExtResource("5_a8fok")
+}, {
+"duration": 0.8,
+"texture": ExtResource("4_hdosi")
+}, {
+"duration": 0.8,
+"texture": ExtResource("3_1l1on")
+}, {
+"duration": 0.8,
+"texture": ExtResource("2_dpbq8")
+}],
+"loop": true,
+"name": &"death",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_0fk2n")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_x5tt6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_djdn0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_ljrxl")
+}],
+"loop": true,
+"name": &"flying",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2n73u"]
+size = Vector2(82, 45)
+
+[node name="CommonEnemy" type="Area2D"]
+script = ExtResource("1_a3jan")
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
+rotation = 3.14159
+scale = Vector2(0.6, 0.6)
+sprite_frames = SubResource("SpriteFrames_iv05s")
+animation = &"death"
+autoplay = "flying"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -1.5)
+shape = SubResource("RectangleShape2D_2n73u")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(-1, -59)
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

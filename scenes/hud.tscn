@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=3 uid="uid://orowf3dgmkvo"]
+
+[ext_resource type="Script" path="res://scripts/hud.gd" id="1_vbpfi"]
+[ext_resource type="FontFile" uid="uid://cpfj0tsup3jr" path="res://assets/fonts/PublicPixel-z84yD.ttf" id="2_t20q3"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_de2m0"]
+line_spacing = 50.0
+font = ExtResource("2_t20q3")
+font_size = 36
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
+
+[node name="HUD" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_vbpfi")
+
+[node name="Score" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 23.0
+grow_horizontal = 2
+text = "99999"
+label_settings = SubResource("LabelSettings_de2m0")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GalaxyContainer" type="Node2D" parent="."]

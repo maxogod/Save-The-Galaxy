@@ -1,0 +1,91 @@
+[gd_scene load_steps=13 format=3 uid="uid://bln4qnhm5px5l"]
+
+[ext_resource type="Script" path="res://scripts/enemy_bomb.gd" id="1_nuttj"]
+[ext_resource type="Texture2D" uid="uid://csjoq7g5x5edf" path="res://assets/textures/bomb_beeping_1.png" id="2_mpq21"]
+[ext_resource type="Texture2D" uid="uid://lesjg2jaljx5" path="res://assets/textures/bomb_beeping_2.png" id="3_bb83p"]
+[ext_resource type="Texture2D" uid="uid://4p8kq87oaqb" path="res://assets/textures/bomb_beeping_3.png" id="4_wiqr0"]
+[ext_resource type="Texture2D" uid="uid://idqrmrskgsh8" path="res://assets/textures/bomb_exploding_1.png" id="5_nv2ul"]
+[ext_resource type="Texture2D" uid="uid://vce6h7hx36nq" path="res://assets/textures/bomb_exploding_2.png" id="6_liu3c"]
+[ext_resource type="Texture2D" uid="uid://b3wlswjgvy6ku" path="res://assets/textures/bomb_exploding_3.png" id="7_u1i1j"]
+[ext_resource type="Texture2D" uid="uid://c3re8lp604ol0" path="res://assets/textures/bomb_exploding_4.png" id="8_0j2k8"]
+[ext_resource type="AudioStream" uid="uid://dlt5v4ynunsrm" path="res://assets/audio/bomb.wav" id="9_mp2yf"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pfifj"]
+animations = [{
+"frames": [{
+"duration": 1.5,
+"texture": ExtResource("2_mpq21")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_bb83p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_wiqr0")
+}],
+"loop": true,
+"name": &"beeping",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 0.5,
+"texture": ExtResource("5_nv2ul")
+}, {
+"duration": 0.5,
+"texture": ExtResource("6_liu3c")
+}, {
+"duration": 0.5,
+"texture": ExtResource("7_u1i1j")
+}, {
+"duration": 0.5,
+"texture": ExtResource("8_0j2k8")
+}, {
+"duration": 0.5,
+"texture": ExtResource("7_u1i1j")
+}, {
+"duration": 0.5,
+"texture": ExtResource("6_liu3c")
+}, {
+"duration": 0.5,
+"texture": ExtResource("5_nv2ul")
+}],
+"loop": true,
+"name": &"exploding",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_k55e6"]
+radius = 11.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mu68i"]
+radius = 63.0
+
+[node name="EnemyBomb" type="Area2D"]
+script = ExtResource("1_nuttj")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_pfifj")
+animation = &"exploding"
+autoplay = "beeping"
+frame_progress = 0.653389
+
+[node name="BombCollision" type="CollisionShape2D" parent="."]
+position = Vector2(-2, 0)
+shape = SubResource("CircleShape2D_k55e6")
+
+[node name="ExplosionCollision" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_mu68i")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(0, -43)
+scale = Vector2(0.6, 0.4)
+
+[node name="ExplosionTimer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
+[node name="BombSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("9_mp2yf")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
+[connection signal="timeout" from="ExplosionTimer" to="." method="_on_explosion_timer_timeout"]

@@ -1,0 +1,92 @@
+[gd_scene load_steps=14 format=3 uid="uid://dkrbtg17utlek"]
+
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_mixix"]
+[ext_resource type="Texture2D" uid="uid://bdo83gt1wxnuh" path="res://assets/textures/player_ship_still.png" id="2_47mlt"]
+[ext_resource type="Texture2D" uid="uid://cepnpijfdd6ty" path="res://assets/textures/ship_alternative_1.png" id="2_u01kf"]
+[ext_resource type="Texture2D" uid="uid://bcxahyrcapw44" path="res://assets/textures/player_ship_flying_1.png" id="3_bnhgu"]
+[ext_resource type="Texture2D" uid="uid://c7g4eei2tiirg" path="res://assets/textures/ship_alternative_2.png" id="3_ny8ty"]
+[ext_resource type="Texture2D" uid="uid://cjuh2mmf07qv" path="res://assets/textures/player_ship_flying_2.png" id="4_7pvcj"]
+[ext_resource type="Texture2D" uid="uid://bd4ciwtek65f1" path="res://assets/textures/ship_alternative_3.png" id="4_irikv"]
+[ext_resource type="Texture2D" uid="uid://cce5ejw55idxe" path="res://assets/textures/player_ship_flying_3.png" id="5_2l3oy"]
+[ext_resource type="Texture2D" uid="uid://dn600w10b6xcq" path="res://assets/textures/ship_alternative_4.png" id="5_nmini"]
+[ext_resource type="Texture2D" uid="uid://bk885xjn3bo6w" path="res://assets/textures/player_ship_flying_4.png" id="6_gf0y4"]
+[ext_resource type="Texture2D" uid="uid://bh8lqe58x3mia" path="res://assets/textures/ship_alternative_still.png" id="6_je223"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_n3jg7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_bnhgu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_7pvcj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_2l3oy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_gf0y4")
+}],
+"loop": true,
+"name": &"flying",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_47mlt")
+}],
+"loop": true,
+"name": &"still",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vxgqw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_u01kf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_ny8ty")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_irikv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_nmini")
+}],
+"loop": true,
+"name": &"flying",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_je223")
+}],
+"loop": true,
+"name": &"still",
+"speed": 5.0
+}]
+
+[node name="Player" type="CharacterBody2D" groups=["player"]]
+motion_mode = 1
+script = ExtResource("1_mixix")
+
+[node name="RedShipSprite" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.8, 0.8)
+sprite_frames = SubResource("SpriteFrames_n3jg7")
+animation = &"flying"
+autoplay = "still"
+
+[node name="PinkShipSprite" type="AnimatedSprite2D" parent="."]
+visible = false
+scale = Vector2(0.8, 0.8)
+sprite_frames = SubResource("SpriteFrames_vxgqw")
+animation = &"flying"
+autoplay = "still"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-46, -25, -51, -13, -54, 31, -52, 38, -39, 38, -36, 31, -36, 2, -30, 2, -22, 21, -16, 21, -10, 9, -1, 19, 7, 9, 16, 20, 21, 20, 29, 2, 35, 2, 35, 33, 38, 38, 49, 38, 52, 32, 47, -11, 45, -26, 40, -23, 34, -9, 23, -9, -2, -25, -26, -11, -38, -8, -39, -24)
+
+[node name="Weapon" type="Marker2D" parent="."]
+position = Vector2(-1, -61)

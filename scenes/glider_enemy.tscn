@@ -1,0 +1,51 @@
+[gd_scene load_steps=8 format=3 uid="uid://ca4gby1f7curi"]
+
+[ext_resource type="Script" path="res://scripts/glider_enemy.gd" id="1_84xff"]
+[ext_resource type="Texture2D" uid="uid://oemu8suj2amw" path="res://assets/textures/enemy_glider_1.png" id="2_d041q"]
+[ext_resource type="Texture2D" uid="uid://dpdn1ohtrbi4q" path="res://assets/textures/enemy_glider_2.png" id="3_dh6q5"]
+[ext_resource type="Texture2D" uid="uid://daticerw5fpg6" path="res://assets/textures/enemy_glider_3.png" id="4_u34n4"]
+[ext_resource type="Texture2D" uid="uid://bltmm2660qp8" path="res://assets/textures/enemy_glider_4.png" id="5_nmarp"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xuf2p"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_d041q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_dh6q5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_u34n4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_nmarp")
+}],
+"loop": true,
+"name": &"flying",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sx5w5"]
+size = Vector2(64, 32)
+
+[node name="GliderEnemy" type="Area2D"]
+script = ExtResource("1_84xff")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+rotation = 3.14159
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_xuf2p")
+animation = &"flying"
+autoplay = "flying"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -3)
+shape = SubResource("RectangleShape2D_sx5w5")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(0, -56)
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
