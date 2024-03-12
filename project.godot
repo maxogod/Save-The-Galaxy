@@ -10,10 +10,14 @@ config_version=5
 
 [application]
 
-config/name="space_invaders"
+config/name="Save-The-Galaxy"
 run/main_scene="res://scenes/main_menu.tscn"
 config/features=PackedStringArray("4.1", "Mobile")
-config/icon="res://icon.svg"
+boot_splash/bg_color=Color(0.0156863, 0.00784314, 0.0745098, 1)
+boot_splash/image="res://assets/textures/icon.png"
+boot_splash/fullsize=false
+config/icon="res://assets/textures/icon.png"
+config/windows_native_icon="res://icon.ico"
 
 [display]
 
