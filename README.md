@@ -18,8 +18,10 @@ You are the **savior** of the *galaxy* and have to fight against an army of alie
 
 ### Gameplay fragments
 
-<img src="./img/battle-gif.gif" alt="In-game gif" width="180"/>
-<img src="./img/dying-gif.gif" alt="In-game death gif" width="180"/>
+<div style="display: flex; justify-content: space-between;">
+    <img src="./img/battle-gif.gif" alt="In-game gif" width="180"/>
+    <img src="./img/dying-gif.gif" alt="In-game death gif" width="180"/>
+</div>
 
 * The bar on top represents the total invasion percentage.
 * The small galaxies at the bottom represent your lives.
