@@ -2,7 +2,7 @@
 
 Save The Galaxy is a space-themed arcade-like shooter game made in Godot! inspired by Galaga.
 
-## Download it from [The game's website](itch.io) and Play **now**!
+## Download it from [The game's website](https://maxogod.itch.io/save-the-galaxy) and Play **now**!
 
 ### Game description
 
@@ -42,7 +42,7 @@ You are the **savior** of the *galaxy* and have to fight against an army of alie
 
 ### Tech details
 
-* **Game engine:** [Godot](godot.opensource) with gdscript
-* **Sprites:** [asesprite](asesprite.com)
-* **Font:**
-* **Sounds:**
+* **Game engine:** [Godot](https://godotengine.org/) with gdscript
+* **Sprites:** [Asesprite](https://www.aseprite.org/)
+* **Font: [Public Pixel](https://www.fontspace.com/public-pixel-font-f72305)**
+* **Sounds: [laser](https://www.youtube.com/watch?v=VPhitKsURtg&ab_channel=PROEffectsFX) - [ship explosion](https://www.youtube.com/watch?v=9FMquJzgDGQ&ab_channel=SoundEffects) - [bomb explosion](https://www.youtube.com/watch?v=0NLKUw63ftM&ab_channel=STTValie) - [hitmarker](https://www.youtube.com/watch?v=v0J90Vbllxg&ab_channel=Swiggity) - [ambient music](https://www.youtube.com/watch?v=Iu8P_vplUiM&ab_channel=Teminite)**
