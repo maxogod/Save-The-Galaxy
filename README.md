@@ -30,8 +30,10 @@ You are the **savior** of the *galaxy* and have to fight against an army of alie
 
 #### Player ships
 
-<img src="./assets/textures/player_ship_still.png" alt="red player ship" width="80"/>
-<img src="./assets/textures/ship_alternative_still.png" alt="pink player ship" width="80"/>
+<div style="display: flex; justify-content: space-between;">
+    <img src="./assets/textures/player_ship_still.png" alt="red player ship" width="80"/>
+    <img src="./assets/textures/ship_alternative_still.png" alt="pink player ship" width="80"/>
+</div>
 
 #### Enemy ships
 
