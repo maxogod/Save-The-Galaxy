@@ -10,9 +10,11 @@ You are the **savior** of the *galaxy* and have to fight against an army of alie
 
 ### Main menu, Ship selection and Game Over
 
-<img src="./img/main.png" alt="Main menu" width="180"/>
-<img src="./img/choose_player.png" alt="Character selection" width="180"/>
-<img src="./img/gameover.png" alt="Game over screen" width="180"/>
+<div style="display: flex; justify-content: space-between;">
+    <img src="./img/main.png" alt="Main menu" width="180"/>
+    <img src="./img/choose_player.png" alt="Character selection" width="180"/>
+    <img src="./img/gameover.png" alt="Game over screen" width="180"/>
+</div>
 
 ### Gameplay fragments
 
