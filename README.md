@@ -4,6 +4,10 @@ Save The Galaxy is a space-themed arcade-like shooter game made in Godot! inspir
 
 ## Download it from [The game's website](https://maxogod.itch.io/save-the-galaxy) and Play **now**!
 
+**Click the star below to see gameplay!**
+
+[<img width=280 src="./assets/textures/icon.png" alt="TRAILER" />](https://youtu.be/u-lp5ocy8yI)
+
 ### Game description
 
 You are the **savior** of the *galaxy* and have to fight against an army of alien *invaders*, but be careful their ships become stronger and faster as the invasion takes place. If you are unsuccesful at guarding them off of the galaxy *they will colonize it!* and the same will happen if you die trying...
